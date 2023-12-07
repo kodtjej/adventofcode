@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 const input = await fs.readFile("input", "utf-8");
-const inputData = input.split("\r\n");
+const inputData = input.split('\n');
 const numberRegex = /\d+/;
 let rows = inputData.map((s) => s.split(''));
 
@@ -19,7 +19,10 @@ function part1() {
     }
   });
 
-  console.log(numbers.reduce((pv, cv) => pv + cv, 0));
+  console.log(
+    'part 1:',
+    numbers.reduce((pv, cv) => pv + cv, 0)
+  );
 }
 
 function isNextToPart(rowindex, colindex) {
@@ -64,19 +67,18 @@ function findNumber(row, index) {
     lastIndex = i;
     number = number + currentChar;
   }
-  console.log(number);
   return [parseInt(number), lastIndex];
 }
 
 part1();
 function part2() {
-  let rows = inputData.map((s) => s.split(""));
+  let rows = inputData.map((s) => s.split(''));
   let coordinates = populateNumbers(rows);
   let sum = 0;
   rows.forEach((row, rowIndex) => {
     row.forEach((val, colIndex) => {
       let surroundingNumbers = [];
-      if (val === "*") {
+      if (val === '*') {
         const left = `${rowIndex}.${colIndex - 1}`;
         const right = `${rowIndex}.${colIndex + 1}`;
         const top = `${rowIndex - 1}.${colIndex}`;
@@ -110,10 +112,10 @@ function part2() {
           sum += surroundingNumbers[0] * surroundingNumbers[1];
         }
       }
-      coordinates.map(c => c.found = false);
+      coordinates.map((c) => (c.found = false));
     });
   });
-  console.log("part 2:",sum);
+  console.log('part 2:', sum);
 }
 
 function populateNumbers(rows) {
